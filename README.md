@@ -39,15 +39,15 @@ error due to a Web UI bug.
 
 Send notifications on successful `check` and all warnings and errors:
 
-![Duplicacy Alert Notification Rule](https://github.com/kgorlen/duplicacy-log/blob/master/images/Duplicacy_rule.jpg?raw=true)
+![Duplicacy Alert Notification Rule](./images/Duplicacy_rule.jpg)
 
 Send notifications when `log_at_start` specified:
 
-![Duplicacy starting Alert Notification Rule](https://github.com/kgorlen/duplicacy-log/blob/master/images/Duplicacy_starting_rule.jpg?raw=true)
+![Duplicacy starting Alert Notification Rule](./images/Duplicacy_starting_rule.jpg)
 
 Send notifications on successful `restore`:
 
-![Duplicacy restore Alert Notification Rule](https://github.com/kgorlen/duplicacy-log/blob/master/images/Duplicacy_restore_rule.jpg?raw=true)
+![Duplicacy restore Alert Notification Rule](./images/Duplicacy_restore_rule.jpg)
 
 **NOTE**: Filtering on more than one keyword currently does not work due to a QNAP
 Notification Center bug.
