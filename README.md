@@ -16,6 +16,9 @@ Prerequisite: [Duplicacy Web UI](https://duplicacy.com/buy.html),
 Download QPKG for appropriate CPU type from the `build` directory and install manually using the
 [QNAP App Center](https://www.qnap.com/en/how-to/knowledge-base/article/how-to-install-qnap-applications-qpkg-files-manually/).
 
+**NOTE**: This QPKG is not signed because `qbuild --sign` requires
+`gpg2`, which QNAP does not provide.
+
 ## Use
 
 Starting `DuplicacyLog` replaces the duplicacy CLI used by the Duplicacy 

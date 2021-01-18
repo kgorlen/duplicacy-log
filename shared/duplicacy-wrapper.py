@@ -65,6 +65,8 @@ stats = ''						# Statistics report
 verbose = False					# Log WARN and ERROR messages
 errors = 0						# ERROR count
 warnings = 0					# WARN count
+chunks_removed = 0				# Count of chunks removed by prune
+snapshots_removed = 0			# Count of snapshots removed by prune
 
 def signal_handler(signum, frame):
 	'''
@@ -171,6 +173,12 @@ while True:
 		errors += 1
 		if verbose:
 			log_tool('[duplicacy {}] {}; {}'.format(operation, CMD, line), 2)
+			
+	if operation == 'prune':
+		if re.search(r'\bINFO\s+CHUNK_DELETE\b', line):
+			chunks_removed += 1
+		elif re.search(r'\bINFO\s+SNAPSHOT_DELETE\b.*\bremoved\b', line):
+			snapshots_removed += 1
 
 	m = re.search(r'\bINFO\s+(\w+)\s+(.*)$', line)
 	if m and m.group(1) in KEYWORDS:
@@ -207,6 +215,12 @@ if warnings > 0:
 
 if cli.poll() > 0:
 	msg += '; Exit status: {}'.format(cli.poll())
+
+if chunks_removed > 0:
+	stats += '; {} chunks removed'.format(chunks_removed)
+	
+if snapshots_removed > 0:
+	stats += '; {} snapshot(s) removed'.format(snapshots_removed)
 
 msg += stats
 
