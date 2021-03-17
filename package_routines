@@ -138,5 +138,5 @@
 #
 pkg_post_install(){
 	$CMD_CHOWN -R admin:administrators "$SYS_QPKG_DIR"
-	$CMD_CHMOD 755 "$SYS_QPKG_DIR/duplicacy-wrapper.py" "$SYS_QPKG_DIR/$QPKG_NAME.sh"
+	$CMD_CHMOD 755 "$SYS_QPKG_DIR/duplicacy-wrapper.py" "$SYS_QPKG_DIR/duplicacyln.sh" "$SYS_QPKG_DIR/$QPKG_NAME.sh"
 }

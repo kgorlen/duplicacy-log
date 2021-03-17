@@ -82,7 +82,7 @@ def signal_handler(signum, frame):
 
 def log_tool(message, severity):
 	'''
-	Log <message< to QNAP Notification Center with specified <severity>,
+	Log <message> to QNAP Notification Center with specified <severity>,
 	0 = Information, 1 = Warning, 2 = Error.
 	
 	NOTE:
