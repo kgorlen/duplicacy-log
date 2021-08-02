@@ -87,10 +87,8 @@ def log_tool(message, severity):
 	
 	NOTE:
 	
-	The QNAP log_tool --user, --app_name, and --category options stopped
-	setting the respective fields in the System Event Log after firmware
-	version 4.4.3.1439(20200925).  Also, the --category option fails with
-	an "unrecognized option" error, though the -G alias does not.
+	The QNAP log_tool --category option fails with an "unrecognized option"
+	error, though the -G alias does not. 
 	
 	'''
 	args = ['log_tool',
@@ -158,6 +156,10 @@ while True:
 	print(line, end='')		# repeat to Web UI
 	sys.stdout.flush()
 	
+#                        Y Y Y Y- M M- D D    H H: m m: s s . S S S
+	if not re.match(r'\d\d\d\d-\d\d-\d\d\s+\d\d:\d\d:\d\d\.\d\d\d\b', line):
+		continue			# skip e.g. check -tabular lines
+
 	m = re.search(r'\bSTORAGE_SET\s+.*set to\s+(.*)$', line)
 	if m: msg += '; Storage: ' + m.group(1)
 		
@@ -180,9 +182,13 @@ while True:
 		elif re.search(r'\bINFO\s+SNAPSHOT_DELETE\b.*\bremoved\b', line):
 			snapshots_removed += 1
 
-	m = re.search(r'\bINFO\s+(\w+)\s+(.*)$', line)
+	m = re.search(r'\bINFO\s+(\w+)\s+(\w.+\w)$', line)
 	if m and m.group(1) in KEYWORDS:
-		if m.group(1) != 'SNAPSHOT_CHECK' or re.search(r'\d+ snapshots and \d+ revisions$', m.group(2)):
+		if m.group(1) == 'SNAPSHOT_CHECK' and re.search(r'All chunks referenced by snapshot', m.group(2)):
+			pass
+		elif m.group(1) == 'SNAPSHOT_COPY' and not re.search(r'Chunks to copy:|Copied \d+ new chunks', m.group(2)):
+			pass
+		else:
 			stats += '; ' + m.group(2)
 
 # Format and log message:
@@ -213,16 +219,16 @@ if warnings > 0:
 	if severity == 0:
 		severity = 1
 
-if cli.poll() > 0:
-	msg += '; Exit status: {}'.format(cli.poll())
-
 if chunks_removed > 0:
-	stats += '; {} chunks removed'.format(chunks_removed)
+	stats += '; {} chunk(s) removed'.format(chunks_removed)
 	
 if snapshots_removed > 0:
 	stats += '; {} snapshot(s) removed'.format(snapshots_removed)
 
 msg += stats
+
+if cli.poll() > 0:
+	msg += '; Exit status: {}'.format(cli.poll())
 
 log_tool('[duplicacy {}] {}{}'.format(operation, CMD, msg), severity)
 

@@ -22,6 +22,7 @@ set -x
 set -e
 mkdir -p "$QPKG_ROOT/bin"
 
+USER=`id -u -n`
 WRAP_CLI="$QPKG_ROOT/duplicacy-wrapper.py"
 WEBUI_ROOT=`/sbin/getcfg Duplicacy Install_Path -f ${CONF}`
 WEBUI_BIN="$WEBUI_ROOT/.duplicacy-web/bin"
@@ -33,10 +34,8 @@ WEBUI_BIN="$WEBUI_ROOT/.duplicacy-web/bin"
 #
 # NOTE:
 #
-# The QNAP log_tool --user, --app_name, and --category options stopped
-# setting the respective fields in the System Event Log after firmware
-# version 4.4.3.1439(20200925).  Also, the --category option fails with
-# an "unrecognized option" error, though the -G alias does not.
+# The --category option fails with an "unrecognized option" error, though 
+# the -G alias does not. 
 #
 function log_alert {
 	log_tool --append "$1" --type $2 --user $USER --app_name DuplicacyLog -G "App Status Change" || true
