@@ -5,9 +5,6 @@ DuplicacyLog captures the output and exit status of `duplicacy` `backup`,
 to the QNAP Notification Center, and optionally posts to 
 [healthchecks.io](https://healthchecks.io/). 
 
-**NOTE**: Logged messages currently do not include the *Users*, 
-*Application*, or *Category* fields due to a QNAP `log_tool` bug. 
-
 ## Installation
 
 Prerequisite: [Duplicacy Web UI](https://duplicacy.com/buy.html),
