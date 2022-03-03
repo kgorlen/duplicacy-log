@@ -37,17 +37,25 @@ error due to a Web UI bug.
 
 ## Example Notification Center filters
 
-Send notifications on successful `check` and all warnings and errors:
+Send notifications on all warnings and errors:
 
-![Duplicacy Alert Notification Rule](./images/Duplicacy_rule.jpg)
+![Duplicacy Alert Notification Rule](./images/Duplicacy_alert_rule.jpg)
+
+Send notifications on successful `check`:
+
+![Duplicacy Check Notification Rule](./images/Duplicacy_check_rule.jpg)
 
 Send notifications when `log_at_start` specified:
 
-![Duplicacy starting Alert Notification Rule](./images/Duplicacy_starting_rule.jpg)
+![Duplicacy Starting Alert Notification Rule](./images/Duplicacy_starting_rule.jpg)
 
 Send notifications on successful `restore`:
 
-![Duplicacy restore Alert Notification Rule](./images/Duplicacy_restore_rule.jpg)
+![Duplicacy Restore Alert Notification Rule](./images/Duplicacy_restore_rule.jpg)
+
+Send DuplicacyLog notifications:
+
+![DuplicacyLog Notification Rule](./images/DuplicacyLog_rule.jpg)
 
 **NOTE**: Filtering on more than one keyword currently does not work due to a QNAP
 Notification Center bug.
