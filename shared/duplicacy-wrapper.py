@@ -61,6 +61,8 @@ cli = None						# duplicacy subprocess Popen object
 healthchecks = None				# Healthchecks.io URL
 msg = ''						# Log message
 operation = None				# 'backup', 'copy', 'prune', 'check', or 'restore'
+repository = None				# Repository name
+storage = None					# Storage name
 stats = ''						# Statistics report
 verbose = False					# Log WARN and ERROR messages
 errors = 0						# ERROR count
@@ -161,10 +163,14 @@ while True:
 		continue			# skip e.g. check -tabular lines
 
 	m = re.search(r'\bSTORAGE_SET\s+.*set to\s+(.*)$', line)
-	if m: msg += '; Storage: ' + m.group(1)
+	if m:
+		storage = m.group(1)
+		msg += '; Storage: ' + storage
 		
 	m = re.search(r'\bREPOSITORY_SET\s+.*set to\s+(.*)$', line)
-	if m: msg += '; Repository: ' + m.group(1)
+	if m:
+		repository = m.group(1)
+		msg += '; Repository: ' + repository
 
 	if re.search(r'\bWARN\b', line):
 		warnings += 1
@@ -238,6 +244,10 @@ if healthchecks:	# https://healthchecks.io/docs/
 			data='[duplicacy {}] {}{}'.format(operation, CMD, msg),
 			timeout=10)
 	except (urllib2.URLError, socket.error) as e:
-		log_tool('[duplicacy {}] {} ping failed: {}'.format(operation, healthchecks, e), 1)
+		msg = ''
+		if repository: msg += '; Repository: ' + repository
+		if storage: msg += '; Storage: ' + storage
+		log_tool('[duplicacy {0}] {1} ping failed error({2}): {3}{4}'.format(
+			operation, healthchecks, e.errno, e.strerror, msg), 1)
 
 sys.exit(cli.poll())
