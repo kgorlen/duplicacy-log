@@ -53,7 +53,7 @@ Send notifications on successful `restore`:
 
 ![Duplicacy Restore Alert Notification Rule](./images/Duplicacy_restore_rule.jpg)
 
-Send DuplicacyLog notifications:
+Send `DuplicacyLog` notifications:
 
 ![DuplicacyLog Notification Rule](./images/DuplicacyLog_rule.jpg)
 
