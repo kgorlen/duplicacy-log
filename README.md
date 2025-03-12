@@ -75,6 +75,3 @@ email instead of running the QNAP `log_tool` command.
 See `shared/duplicacyln.sh` for example `bash` commands that replace 
 the `duplicacy` CLI executable run by Duplicay Web with the wrapper 
 script. 
-
-(The wrapper is not a `bash` script because `bash` ignores the `INT` signal,
-which Duplicacy Web sends to abort the CLI.)
