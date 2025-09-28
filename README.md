@@ -1,9 +1,9 @@
 # DuplicacyLog -- QPKG to log messages to QNAP Notification Center and healthchecks.io
 
-DuplicacyLog captures the output and exit status of `duplicacy` `backup`, 
-`copy`, `prune`, `check`, and `restore` commands, logs a summary message 
-to the QNAP Notification Center, and optionally posts to 
-[healthchecks.io](https://healthchecks.io/). 
+DuplicacyLog captures the output and exit status of `duplicacy` `backup`,
+`copy`, `prune`, `check`, and `restore` commands, logs a summary message
+to the QNAP Notification Center, and optionally posts to
+[healthchecks.io](https://healthchecks.io/).
 
 ## Installation
 
@@ -18,22 +18,22 @@ Download QPKG for appropriate CPU type from the `build` directory and install ma
 
 ## Use
 
-Starting `DuplicacyLog` replaces the `duplicacy` CLI used by the Duplicacy 
-Web UI with the `duplicacy-wrapper.py` script and links 
-`/usr/bin/duplicacy` to the real CLI. Stopping `DuplicacyLog` restores 
-the real CLI and `/usr/bin/duplicacy` remains linked to the real CLI. 
+Starting `DuplicacyLog` replaces the `duplicacy` CLI used by the Duplicacy
+Web UI with the `duplicacy-wrapper.py` script and links
+`/usr/bin/duplicacy` to the real CLI. Stopping `DuplicacyLog` restores
+the real CLI and `/usr/bin/duplicacy` remains linked to the real CLI.
 
-Commands are the same as the `duplicacy` CLI, plus the following options 
-may be set in the `-comment` global option: 
-	
-Option				| Description
-:---				| :---
-`log_at_start`		| Log an Information message when starting `duplicacy`	
-`log_verbose`		| Log individual WARN, ERROR, FATAL, and ASSERT messages
+Commands are the same as the `duplicacy` CLI, plus the following options
+may be set in the `-comment` global option:
+
+Option    | Description
+:---    | :---
+`log_at_start`  | Log an Information message when starting `duplicacy`
+`log_verbose`  | Log individual WARN, ERROR, FATAL, and ASSERT messages
 `healthchecks=`*url*| Send pings to healthchecks.io
 
-**NOTE**: Use of whitespace in the `-comment` option currently causes an 
-error due to a Web UI bug. 
+**NOTE**: Use of whitespace in the `-comment` option currently causes an
+error due to a Web UI bug.
 
 ## Example Notification Center filters
 
@@ -68,10 +68,10 @@ replaces it with a link to the wrapper script.
 
 ## Use in other environments
 
-Modify `shared/duplicacy-wrapper.py` to adapt DuplicacyLog to other 
-environments, for example, modify the `log_tool()` function to send 
-email instead of running the QNAP `log_tool` command. 
+Modify `shared/duplicacy-wrapper.py` to adapt DuplicacyLog to other
+environments, for example, modify the `log_tool()` function to send
+email instead of running the QNAP `log_tool` command.
 
-See `shared/duplicacyln.sh` for example `bash` commands that replace 
-the `duplicacy` CLI executable run by Duplicay Web with the wrapper 
-script. 
+See `shared/duplicacyln.sh` for example `bash` commands that replace
+the `duplicacy` CLI executable run by Duplicay Web with the wrapper
+script.
