@@ -80,9 +80,9 @@ sighandler() {
 	trap - EXIT
 	unwrap
 
-	rm -f /usr/bin/duplicacy
 	CLI="$(newest "$WEBUI_BIN")"
 	if [ -x "$WEBUI_BIN/$CLI" ]; then
+		rm -f /usr/bin/duplicacy
 		ln -s "$WEBUI_BIN/$CLI" /usr/bin/duplicacy
 		log_alert "[DuplicacyLog] /usr/bin/duplicacy linked to $WEBUI_BIN/$CLI" 0
 	else

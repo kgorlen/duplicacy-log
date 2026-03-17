@@ -1,2 +1,3 @@
+.vscode
 shared/.gitignore
 shared/ping_healthchecks.py
